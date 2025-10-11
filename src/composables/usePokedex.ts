@@ -1,47 +1,41 @@
+import { handleGetPokemons } from "@/helpers/handleGetPokemons";
 import { usePokedexStore } from "@/stores/pokedex";
+import { useQuery } from "@tanstack/vue-query";
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 
 export const usePokedex = () => {
   const store = usePokedexStore()
-  const { currentPage, pageSize, theme } = storeToRefs(store)
+  const { currentPage, pageSize, pokemons, totalPages, theme } = storeToRefs(store)
 
-  // Lógica de Paginación
-  const paginationRange = computed(() => {
-    const current = 1 //store.state.currentPage;
-    const last = 20 //totalPages.value;
-    const delta = 2;
-    const range: (number | '...')[] = [];
 
-    for (let i = 1; i <= last; i++) {
-      if (i === 1 || i === last || (i >= current - delta && i <= current + delta)) {
-        range.push(i);
-      }
+  const {data, isLoading, isFetching} = useQuery({
+    queryKey: ['pokemons/page=', currentPage],
+    queryFn: () => handleGetPokemons(currentPage.value, pageSize.value)
+  })
+
+  watch(data,(pokemons) => {
+    if (pokemons) {
+      console.log(pokemons)
+      // console.log(pokemons.pokemons)
+      store.setPokeons(pokemons.pokemons)
+      store.setTotalPages(pokemons.totalPages)
     }
+  })
 
-    const finalRange: (number | '...')[] = [];
-    let lastPushed: number | '...' = 0;
-    for (const page of range) {
-      if (page === '...') {
-        finalRange.push('...');
-      } else if (page > (lastPushed as number) + 1) {
-        finalRange.push('...');
-        finalRange.push(page);
-      } else {
-        finalRange.push(page);
-      }
-      lastPushed = page;
-    }
-    return finalRange;
-  });
 
   return {
     theme,
+    pokemons,
     currentPage,
-    totalPage: 1314,
+    totalPages,
     pageSize,
-    paginationRange,
+    isLoading,
+    isFetching,
 
+    setPage(page:number) {
+      store.setPage(page)
+    }
   }
 }
 

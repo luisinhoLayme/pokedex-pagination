@@ -15,7 +15,7 @@
 
   /* utils */
   --shadow-poke: 0 1px 3px 1px rgba(0,0,0,0.25);
-  --shadow-poke-v2: 0 2px 3px rgba(222,222,222,0.20);
+  --shadow-poke-v2: 0 2px 3px rgba(222,222,222,0.10);
 
   --text-md: 20px;
 }
