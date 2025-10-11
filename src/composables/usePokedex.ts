@@ -6,20 +6,20 @@ import { computed, watch } from "vue";
 
 export const usePokedex = () => {
   const store = usePokedexStore()
-  const { currentPage, pageSize, pokemons, totalPages, theme } = storeToRefs(store)
+  const { currentPage, pageSize, pokemons, totalPages, theme, results, typeFilter } = storeToRefs(store)
 
 
   const {data, isLoading, isFetching} = useQuery({
     queryKey: ['pokemons/page=', currentPage],
-    queryFn: () => handleGetPokemons(currentPage.value, pageSize.value)
+    queryFn: () => handleGetPokemons(currentPage.value, pageSize.value, typeFilter.value)
   })
 
   watch(data,(pokemons) => {
     if (pokemons) {
-      console.log(pokemons)
+      // console.log(pokemons.count)
       // console.log(pokemons.pokemons)
       store.setPokeons(pokemons.pokemons)
-      store.setTotalPages(pokemons.totalPages)
+      store.setTotalPages(pokemons.totalPages, pokemons.count)
     }
   })
 
@@ -30,6 +30,7 @@ export const usePokedex = () => {
     currentPage,
     totalPages,
     pageSize,
+    results,
     isLoading,
     isFetching,
 

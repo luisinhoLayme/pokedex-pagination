@@ -10,17 +10,20 @@ export const usePokedexStore = defineStore('pokedex', () => {
   const typeFilter = ref<string>('All')
   const currentPage = ref<number>(1)
   const pageSize = ref<number>(20)
-  const totalPages = ref<number>(20)
+  const totalPages = ref<number>(0)
+  const results = ref<number>(0)
 
-  console.log(currentPage)
+  // console.log(currentPage)
 
   return {
     // props
     theme,
     currentPage,
+    typeFilter,
     pageSize,
     totalPages,
     pokemons,
+    results,
 
     //Actions
     setPokeons(pokemonsApi: Pokemon[]) {
@@ -28,10 +31,15 @@ export const usePokedexStore = defineStore('pokedex', () => {
     },
     setPage(page: number) {
       currentPage.value = page
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // window.scrollTo({ top: 0, behavior: 'smooth' });
     },
-    setTotalPages(pages: number) {
+    setTotalPages(pages: number, counts:number) {
       totalPages.value = pages
+      results.value = counts
+    },
+    setFilter(type: string) {
+      typeFilter.value = type
+      currentPage.value = 1
     }
   }
 })

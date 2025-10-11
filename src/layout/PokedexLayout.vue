@@ -1,7 +1,10 @@
 <script setup lang='ts'>
 import ButtonTheme from '@/components/ButtonTheme.vue'
+import { usePokedex } from '@/composables/usePokedex';
+import PokemonTypes from '@/components/PokemonTypes.vue'
 
 defineProps({})
+const { currentPage, totalPages } = usePokedex()
 
 </script>
 
@@ -28,32 +31,11 @@ defineProps({})
       <button
         class="text-center h-max p-2.5 cursor-pointer dark:bg-bg-2 border border-b dark:border-b/60 rounded-md"
       >Favorites</button>
-      <div>
-        <select id="countries" class="bg-white border border-b rounded-lg outline-none block w-full p-2.5 dark:bg-bg-2 dark:border-b/60 dark:placeholder-gray-400 dark:text-text cursor-pointer">
-          <option selected>All types</option>
-          <option value="normal">Normal</option>
-          <option value="fighting">Fighting</option>
-          <option value="flying">Flying</option>
-          <option value="poison">Poison</option>
-          <option value="ground">Ground</option>
-          <option value="rock">Rock</option>
-          <option value="bug">Bug</option>
-          <option value="ghost">Ghost</option>
-          <option value="steel">Steel</option>
-          <option value="fire">Fire</option>
-          <option value="water">Water</option>
-          <option value="grass">Grass</option>
-          <option value="electric">Electric</option>
-          <option value="psychic">Psychic</option>
-          <option value="ice">Ice</option>
-          <option value="dragon">Dragon</option>
-          <option value="fairy">Fairy</option>
-          <option value="dark">Dark</option>
-          <option value="unknown">Unknown</option>
-          <option value="shadow">Shadow</option>
-        </select>
-      </div>
-      <p class="flex justify-center md:justify-end items-center font-light dark:text-b">Page 4 / 45</p>
+      <PokemonTypes />
+      <p
+        class="flex justify-center md:justify-end items-center font-light dark:text-b text-sm">
+        Page {{currentPage}} / {{totalPages}}
+      </p>
     </section>
   </header>
   <RouterView />
