@@ -10,7 +10,7 @@ export const usePokedex = () => {
 
 
   const {data, isLoading, isFetching} = useQuery({
-    queryKey: ['pokemons/page=', currentPage],
+    queryKey: ['pokemons', { currentPage, typeFilter }],
     queryFn: () => handleGetPokemons(currentPage.value, pageSize.value, typeFilter.value)
   })
 
@@ -36,6 +36,10 @@ export const usePokedex = () => {
 
     setPage(page:number) {
       store.setPage(page)
+    },
+
+    setFilter(type: string) {
+      store.setFilter(type)
     }
   }
 }

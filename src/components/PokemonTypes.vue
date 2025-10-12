@@ -5,12 +5,13 @@ import { usePokedex } from '@/composables/usePokedex'
 defineProps({})
 const selectedType = ref()
 
-const {} = usePokedex()
+const { setFilter } = usePokedex()
 
 const handleSelectType = (e: Event) => {
   const selectElement = e.target as HTMLSelectElement
   selectedType.value = selectElement.value
-  console.log(selectedType.value)
+  setFilter(selectedType.value)
+  // console.log(selectedType.value)
 }
 </script>
 
@@ -20,7 +21,7 @@ const handleSelectType = (e: Event) => {
       class="bg-white border border-b rounded-lg outline-none block w-full p-2.5 dark:bg-bg-2 dark:border-b/60 dark:placeholder-gray-400 dark:text-text cursor-pointer"
       @change="handleSelectType"
     >
-      <option selected>All types</option>
+      <option selected value="All">All types</option>
       <option value="normal">Normal</option>
       <option value="fighting">Fighting</option>
       <option value="flying">Flying</option>
