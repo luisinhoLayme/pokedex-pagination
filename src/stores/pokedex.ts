@@ -20,6 +20,7 @@ export const usePokedexStore = defineStore('pokedex', () => {
     theme,
     currentPage,
     typeFilter,
+    searchQuery,
     pageSize,
     totalPages,
     pokemons,

@@ -24,17 +24,20 @@ const handlePokemonsReturn = async(list: Result[]) => {
   return pokemons
 }
 
-export const handleGetPokemons = async (page: number, pageSize: number, filterType: string) => {
+export const handleGetPokemons = async (
+  page: number,
+  pageSize: number,
+  filterType: string,
+  search?: string
+) => {
 
   if (filterType !== 'All') {
     const { data } = await pokeApi.get<PokemonListTypeResponse>(`/type/${filterType}`)
-    // console.log(data)
 
     const pokemonsDB = data.pokemon.map((p) => p.pokemon)
     const start = (page - 1) * 20
     const end = start + 20
-    // console.log(pokemons)
-    // console.log(typeof pokemons)
+
     const pokemons = await handlePokemonsReturn(pokemonsDB.slice(start, end))
 
     return {
