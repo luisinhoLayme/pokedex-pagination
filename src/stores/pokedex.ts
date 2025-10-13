@@ -41,6 +41,11 @@ export const usePokedexStore = defineStore('pokedex', () => {
     setFilter(type: string) {
       typeFilter.value = type
       currentPage.value = 1
+      searchQuery.value = ''
+    },
+    setSearch(name: string) {
+      searchQuery.value = name
+      currentPage.value = 1
     }
   }
 })

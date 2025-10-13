@@ -31,21 +31,40 @@ export const handleGetPokemons = async (
   search?: string
 ) => {
 
+  const start = (page - 1) * 20
+  const end = start + 20
+
   if (filterType !== 'All') {
+    console.log('type filter')
     const { data } = await pokeApi.get<PokemonListTypeResponse>(`/type/${filterType}`)
 
     const pokemonsDB = data.pokemon.map((p) => p.pokemon)
-    const start = (page - 1) * 20
-    const end = start + 20
 
-    const pokemons = await handlePokemonsReturn(pokemonsDB.slice(start, end))
+    let pokemons = []
 
-    return {
-      count: data.pokemon.length,
-      pokemons,
-      totalPages:  Math.ceil(data.pokemon.length / pageSize)
+    if (search) {
+      const filtered = pokemonsDB.filter(poke => poke.name.toLowerCase().includes(search.toLowerCase()))
+      pokemons = await handlePokemonsReturn(filtered.slice(start, end))
+
+      return {
+        count: filtered.length,
+        pokemons,
+        totalPages:  Math.ceil(filtered.length / pageSize)
+      }
     }
-  } else {
+    if (!search) {
+      pokemons = await handlePokemonsReturn(pokemonsDB.slice(start, end))
+      return {
+        count: data.pokemon.length,
+        pokemons,
+        totalPages:  Math.ceil(data.pokemon.length / pageSize)
+      }
+    }
+
+  }
+
+  if (filterType === 'All' && !search) {
+    console.log('type all')
     const { data } = await pokeApi.get<PokemonListResponse>(`/pokemon?offset=${ (page - 1) * pageSize }&limit=${pageSize}`)
 
     const pokemons = await handlePokemonsReturn(data.results)
@@ -54,6 +73,23 @@ export const handleGetPokemons = async (
       count: data.count,
       pokemons,
       totalPages:  Math.ceil(data.count / pageSize)
+    }
+  }
+
+  if (filterType === 'All' && search) {
+    console.log('type all search')
+    const { data } = await pokeApi.get<PokemonListResponse>(`/pokemon?offset=0&limit=10000`)
+    console.log(data)
+
+    const filtered = data.results.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    console.log(filtered)
+
+    const pokemons = await handlePokemonsReturn(filtered.slice(start, end))
+
+    return {
+      count: filtered.length,
+      pokemons,
+      totalPages:  Math.ceil(filtered.length / pageSize)
     }
   }
 }

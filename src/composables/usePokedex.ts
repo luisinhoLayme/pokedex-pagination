@@ -13,8 +13,13 @@ export const usePokedex = () => {
 
 
   const {data, isLoading, isFetching} = useQuery({
-    queryKey: ['pokemons', { currentPage, typeFilter }],
-    queryFn: () => handleGetPokemons(currentPage.value, pageSize.value, typeFilter.value)
+    queryKey: ['pokemons', { currentPage, typeFilter, searchQuery}],
+    queryFn: () => handleGetPokemons(
+      currentPage.value,
+      pageSize.value,
+      typeFilter.value,
+      searchQuery.value
+    )
   })
 
   watch(data,(pokemons) => {
@@ -43,6 +48,10 @@ export const usePokedex = () => {
 
     setFilter(type: string) {
       store.setFilter(type)
+    },
+
+    setSearch(name: string) {
+      store.setSearch(name)
     }
   }
 }

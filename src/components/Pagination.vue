@@ -36,40 +36,30 @@ const paginationRange = computed(() => {
 </script>
 
 <template>
-  <footer class="grid gap-4 my-6 md:grid-cols-[2fr_1fr] md:items-center">
-    <!-- Botones de Paginación -->
-    <div class="flex items-center flex-wrap gap-1 space-x-2">
-      <button @click="setPage(currentPage - 1)" :disabled="currentPage === 1"
-        class="bg-white border dark:bg-bg dark:border-b/50 dark:text-text p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        :class="theme === 'light' ? 'bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-50/10' : 'bg-gray-700 hover:bg-gray-600'">
-        Previous
-      </button>
+  <!-- Botones de Paginación -->
+  <div class="flex items-center flex-wrap gap-1 space-x-2">
+    <button @click="setPage(currentPage - 1)" :disabled="currentPage === 1"
+      class="bg-white border border-b dark:bg-bg-2 cursor-pointer dark:border-b/50 dark:text-text p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-gray-200 dark:hover:bg-gray-50/10">
+      Previous
+    </button>
 
-      <template v-for="page in paginationRange" :key="page">
-        <span v-if="page === '...'" class="px-2 dark:text-text">...</span>
-        <button v-else @click="setPage(page)"
-          class="border border-b dark:bg-bg-2  dark:border-b/50 p-2 px-4 rounded-lg font-normal transition-colors"
-          :class="[
-            page === currentPage
-              ? 'bg-bg text-white shadow-md dark:bg-white dark:text-bg dark:hover:bg-white'
-              : theme === 'light' ? 'bg-white hover:bg-gray-200 dark:text-text dark:hover:bg-gray-50/10' : 'bg-gray-700 hover:bg-gray-600'
-          ]">
-          {{ page }}
-        </button>
-      </template>
-
-      <button @click="setPage(currentPage + 1)" :disabled="currentPage === 66"
-        class="bg-white border border-b dark:bg-bg-2 dark:border-b/50 dark:text-text p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed dark:hover:bg-gray-50/10"
-        :class="theme === 'light' ? 'bg-gray-200 hover:bg-gray-300' : 'bg-gray-700 hover:bg-gray-600'">
-        Next
+    <template v-for="page in paginationRange" :key="page">
+      <span v-if="page === '...'" class="px-2 dark:text-text">...</span>
+      <button v-else @click="setPage(page)"
+        class="border border-b dark:bg-bg-2 cursor-pointer dark:border-b/50 p-2 px-4 rounded-lg font-normal transition-colors" :class="[
+          page === currentPage
+            ? 'bg-bg text-white shadow-md dark:bg-white dark:text-bg dark:hover:bg-white'
+            : theme === 'light' ? 'bg-white hover:bg-gray-200 dark:text-text dark:hover:bg-gray-50/10' : 'bg-gray-700 hover:bg-gray-600'
+        ]">
+        {{ page }}
       </button>
-    </div>
-    <div>
-      <p class="text-center text-bg dark:text-text md:text-right font-light text-sm">
-        Showing {{ pokemons.length }} / {{ results }} results
-      </p>
-    </div>
-  </footer>
+    </template>
+
+    <button @click="setPage(currentPage + 1)" :disabled="currentPage === totalPages || totalPages === 0"
+      class="bg-white border border-b dark:bg-bg-2 cursor-pointer dark:border-b/50 dark:text-text p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-gray-200 dark:hover:bg-gray-50/10">
+      Next
+    </button>
+  </div>
 </template>
 
 <style scoped></style>

@@ -1,10 +1,17 @@
 <script setup lang='ts'>
+import { ref } from 'vue'
 import ButtonTheme from '@/components/ButtonTheme.vue'
 import { usePokedex } from '@/composables/usePokedex';
 import PokemonTypes from '@/components/PokemonTypes.vue'
 
 defineProps({})
-const { currentPage, totalPages } = usePokedex()
+const { currentPage, totalPages, setSearch } = usePokedex()
+const searchInput = ref('')
+
+const onSubmitSearch = () => {
+  setSearch(searchInput.value)
+  // searchInput.value = ''
+}
 
 </script>
 
@@ -19,11 +26,14 @@ const { currentPage, totalPages } = usePokedex()
     </section>
     <section class="grid gap-2 md:grid-cols-4 lg:grid-cols-7 xl:items-center">
       <div class="md:col-span-full lg:col-start-1 lg:col-end-3 xl:col-start-2 xl:col-end-4">
-        <input
-          class="border border-b dark:border-b/60 outline-none w-full p-2.5 rounded-md"
-          type="text"
-          placeholder="Search for name..."
-        />
+        <form @submit.prevent="onSubmitSearch">
+          <input
+            v-model="searchInput"
+            class="border border-b dark:border-b/60 outline-none w-full p-2.5 rounded-md"
+            type="text"
+            placeholder="Search for name..."
+          />
+        </form>
       </div>
       <button
         class="text-center h-max bg-bg dark:bg-text text-white dark:text-bg p-2.5 cursor-pointer border border-b rounded-md lg:col-start-4 xl:col-start-auto"

@@ -3,8 +3,8 @@ import PokemonCard from '@/components/PokemonCard.vue'
 import Pagination from '@/components/Pagination.vue'
 import { usePokedex } from '@/composables/usePokedex';
 
-const skeleton = new Array(20).fill(null)
-const { pokemons, isLoading, isFetching } = usePokedex()
+const skeleton = new Array(12).fill(null)
+const { pokemons, isLoading, isFetching, results, pageSize, totalPages } = usePokedex()
 // console.log(pokes)
 </script>
 
@@ -23,6 +23,14 @@ const { pokemons, isLoading, isFetching } = usePokedex()
       <div class="min-h-1 bg-b/15 w-50"></div>
       <div class="min-h-2 bg-b/15"></div>
     </div>
+
+    <div v-else-if="!pokemons || pokemons.length === 0" class="text-center p-8 col-span-full">
+        <p class="text-xl lg:text-2xl font-medium dark:text-text">No Pokémon found!</p>
+        <p class="mt-2 text-sm dark:text-gray-400">
+            Adjust your filters or your search.
+        </p>
+    </div>
+
     <PokemonCard
       v-else-if="pokemons"
       v-for="poke of pokemons"
@@ -30,7 +38,14 @@ const { pokemons, isLoading, isFetching } = usePokedex()
       :key="poke.id"
     />
   </main>
-  <Pagination />
+  <footer class="grid gap-4 my-6 md:grid-cols-[2fr_1fr] md:items-center">
+    <Pagination  />
+    <div>
+      <p class="text-center text-bg dark:text-text md:text-right font-light text-sm">
+        Showing {{ pokemons.length }} / {{ results }} results
+      </p>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
