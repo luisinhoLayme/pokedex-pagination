@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PokedexLayout from '@/layout/PokedexLayout.vue'
-import PokedexView from '@/views/PokedexView.vue'
-import PokemonDetails from '@/views/PokemonDetails.vue'
-import FavoritesView from '@/views/FavoritesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,14 +10,14 @@ const router = createRouter({
       component: PokedexLayout,
       redirect: { name: 'pokedex' },
       children: [
-        { path: '/pokedex', name: 'pokedex', component: PokedexView },
-        { path: '/favorites', name: 'fovorites', component: FavoritesView }
+        { path: '/pokedex', name: 'pokedex', component: () => import('@/views/PokedexView.vue') },
+        { path: '/favorites', name: 'favorites', component: () => import('@/views/FavoritesView.vue') }
       ]
     },
     {
       path: '/pokemon/:id',
       name: 'pokemon',
-      component: PokemonDetails
+      component: () => import('@/views/PokemonDetails.vue')
     },
   ],
 })

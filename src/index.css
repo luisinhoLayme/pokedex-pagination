@@ -20,8 +20,9 @@
   --text-md: 20px;
 }
 
+/*#F7F5E6*/
 body {
-  @apply bg-white dark:bg-bg-2;
+  @apply bg-[#f7f5e6] dark:bg-bg-2;
 }
 
 #app {

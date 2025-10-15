@@ -2,7 +2,12 @@
 import { ref } from 'vue'
 import { usePokedex } from '@/composables/usePokedex'
 
-defineProps({})
+type Props = {
+  disabledArrt: boolean
+}
+
+defineProps<Props>()
+
 const selectedType = ref()
 
 const { setFilter } = usePokedex()
@@ -11,14 +16,14 @@ const handleSelectType = (e: Event) => {
   const selectElement = e.target as HTMLSelectElement
   selectedType.value = selectElement.value
   setFilter(selectedType.value)
-  // console.log(selectedType.value)
 }
 </script>
 
 <template>
   <section>
     <select id="countries"
-      class="bg-white border border-b rounded-lg outline-none block w-full p-2.5 dark:bg-bg-2 dark:border-b/60 dark:placeholder-gray-400 dark:text-text cursor-pointer"
+      :disabled="disabledArrt"
+      class="bg-white border border-b rounded-lg outline-none block w-full p-2.5 dark:bg-bg-2 dark:border-b/60 dark:placeholder-gray-400 dark:text-text cursor-pointer disabled:text-b disabled:cursor-default"
       @change="handleSelectType"
     >
       <option selected value="All">All types</option>

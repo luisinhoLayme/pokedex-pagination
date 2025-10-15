@@ -19,7 +19,8 @@ export const usePokedex = () => {
       pageSize.value,
       typeFilter.value,
       searchQuery.value
-    )
+    ),
+    staleTime: 1000 * 60 * 10, // Los datos se guardan en caché por 10 minutos
   })
 
   watch(data,(pokemons) => {

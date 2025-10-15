@@ -1,5 +1,4 @@
 import type { Pokemon } from "@/interfaces/pokemon";
-import type { PokemonResponse } from "@/interfaces/pokeon.response";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 

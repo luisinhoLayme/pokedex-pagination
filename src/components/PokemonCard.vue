@@ -1,40 +1,23 @@
 <script setup lang='ts'>
 import type { PokemonResponse } from '@/interfaces/pokeon.response';
 import img from './../assets/bulbbasaur.png'
+import { ref } from 'vue'
 import HeartIcon from './icons/IconHeart.vue'
 import type { Pokemon } from '@/interfaces/pokemon';
-import { ref } from 'vue'
+import { typeColors } from '@/utils/typeColors'
+import { useFavorites } from '../composables/useFavorites'
 
 type Props = {
   pokemon: Pokemon
 }
+
 const { pokemon } = defineProps<Props>()
 const color = ref('#A8A77A')
 
-const typeColors: Record<string, string> = {
-  normal: '#A8A77A',
-  fire: '#EE8130',
-  water: '#6390F0',
-  electric: '#F7D02C',
-  grass: '#7AC74C',
-  ice: '#96D9D6',
-  fighting: '#C22E28',
-  poison: '#A33EA1',
-  ground: '#E2BF65',
-  flying: '#A98FF3',
-  psychic: '#F95587',
-  bug: '#A6B91A',
-  rock: '#B6A136',
-  ghost: '#735797',
-  dragon: '#6F35FC',
-  dark: '#705746',
-  steel: '#B7B7CE',
-  fairy: '#D685AD',
-}
-
 const type = pokemon.types[0]?.type.name as string
-
 color.value = typeColors[type] || '#A8A77A'
+
+const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
 
 </script>
 
@@ -45,7 +28,11 @@ color.value = typeColors[type] || '#A8A77A'
       :style="{backgroundColor: `${color}cc`}"
     ></div>
     <header class="flex justify-between items-center relative">
-      <i class="absolute -left-2 top-0 text-b/50">
+      <i
+        @click="toggleFavoriteStatus(pokemon.id)"
+        class="absolute -left-2 top-0 cursor-pointer"
+        :class="[isPokemonFavorite(pokemon.id) ? 'text-text' : 'text-b/50']"
+      >
         <HeartIcon />
       </i>
       <div>

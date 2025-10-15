@@ -1,17 +1,44 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import ButtonTheme from '@/components/ButtonTheme.vue'
 import { usePokedex } from '@/composables/usePokedex';
 import PokemonTypes from '@/components/PokemonTypes.vue'
+import { useRoute, useRouter, type RouteLocationNormalizedLoadedGeneric } from 'vue-router';
 
 defineProps({})
-const { currentPage, totalPages, setSearch } = usePokedex()
+
+const router = useRouter()
+const route = useRoute()
+
 const searchInput = ref('')
+const disableAttr = ref(false)
+const activeView = ref('pokedex')
+
+const { currentPage, totalPages, setSearch } = usePokedex()
 
 const onSubmitSearch = () => {
   setSearch(searchInput.value)
   // searchInput.value = ''
 }
+
+const goToPage = (routePage: string) => {
+  // activeView.value = routePage
+  router.push({name: routePage})
+}
+
+const changePage = (page: RouteLocationNormalizedLoadedGeneric) => {
+  if(page.path === '/favorites') {
+    disableAttr.value = true
+    activeView.value = 'favorites'
+  }
+  if (route.path === '/pokedex') {
+    disableAttr.value = false
+    activeView.value = 'pokedex'
+  }
+}
+
+changePage(route)
+watch(route, changePage)
 
 </script>
 
@@ -28,6 +55,7 @@ const onSubmitSearch = () => {
       <div class="md:col-span-full lg:col-start-1 lg:col-end-3 xl:col-start-2 xl:col-end-4">
         <form @submit.prevent="onSubmitSearch">
           <input
+            :disabled="disableAttr"
             v-model="searchInput"
             class="border border-b dark:border-b/60 outline-none w-full p-2.5 rounded-md"
             type="text"
@@ -36,12 +64,16 @@ const onSubmitSearch = () => {
         </form>
       </div>
       <button
-        class="text-center h-max bg-bg dark:bg-text text-white dark:text-bg p-2.5 cursor-pointer border border-b rounded-md lg:col-start-4 xl:col-start-auto"
+        @click="goToPage('pokedex')"
+        :class="{'active': activeView === 'pokedex'}"
+        class="button-pokedex text-center h-max p-2.5 cursor-pointer border border-b rounded-md lg:col-start-4 xl:col-start-auto"
       >Pokedex</button>
       <button
-        class="text-center h-max p-2.5 cursor-pointer dark:bg-bg-2 border border-b dark:border-b/60 rounded-md"
+        @click="goToPage('favorites')"
+        :class="{'active': activeView === 'favorites'}"
+        class="button-pokedex text-center h-max p-2.5 cursor-pointer border border-b dark:border-b/60 rounded-md"
       >Favorites</button>
-      <PokemonTypes />
+      <PokemonTypes :disabled-arrt="disableAttr" />
       <p
         class="flex justify-center md:justify-end items-center font-light dark:text-b text-sm">
         Page {{currentPage}} / {{totalPages}}
@@ -52,5 +84,17 @@ const onSubmitSearch = () => {
 </template>
 
 <style scoped>
+html {
+  .button-pokedex.active {
+    background-color: #303030;
+    color: #f5f5f5;
+  }
+  &.dark {
 
+    .button-pokedex.active {
+      background-color: #f5f5f5;
+      color: #282828;
+    }
+  }
+}
 </style>
