@@ -9,7 +9,7 @@ const { pokemons, isLoading, isPending, results } = usePokedex()
 </script>
 
 <template>
-  <main class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+  <main class="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
     <div
       v-if="isPending"
       v-for="ske of skeleton"
@@ -40,7 +40,7 @@ const { pokemons, isLoading, isPending, results } = usePokedex()
   <footer class="grid gap-4 my-6 md:grid-cols-[2fr_1fr] md:items-center">
     <Pagination  />
     <div>
-      <p class="text-center text-bg dark:text-text md:text-right font-light text-sm">
+      <p class="text-center text-dark-10 dark:text-light-10 md:text-right font-light text-sm">
         Showing {{ pokemons.length }} / {{ results }} results
       </p>
     </div>

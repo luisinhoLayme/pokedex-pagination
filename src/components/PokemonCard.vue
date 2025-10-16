@@ -5,6 +5,7 @@ import type { Pokemon } from '@/interfaces/pokemon';
 import { typeColors } from '@/utils/typeColors'
 import { getTypeColorClasses } from '@/utils/getTypeColorClasses'
 import { useFavorites } from '../composables/useFavorites'
+import { useRouter } from 'vue-router';
 
 type Props = {
   pokemon: Pokemon
@@ -12,18 +13,23 @@ type Props = {
 
 const { pokemon } = defineProps<Props>()
 const color = ref('#A8A77A')
+const roter = useRouter()
 
 const type = pokemon.types[0]?.type.name as string
 color.value = typeColors[type] || '#A8A77A'
 
 const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
 
+const goToPokemonDetails = (name: string) => {
+  roter.push({name: 'pokemon', params: { name }})
+}
+
 </script>
 
 <template>
-  <article class="shadow-poke dark:shadow-poke-v2 rounded-xs grid gap-3 p-5 relative">
+  <article class="shadow-xss dark:shadow-xsd/15 rounded-xs grid gap-3 p-5 relative dark:bg-dark-40">
     <div
-      :class="`w-14 h-14 blur-2xl absolute right-15 top-15 ${color}`"
+      :class="`w-14 h-14 dark:w-12 dark:h-12 blur-2xl dark:blur-xl absolute right-15 top-15 ${color}`"
     ></div>
     <header class="flex justify-between items-center relative">
       <i
@@ -34,8 +40,8 @@ const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
         <HeartIcon />
       </i>
       <div>
-        <h2 class="text-md font-medium dark:text-light-10">{{pokemon.name}}</h2>
-        <span class="text-light-20">#{{pokemon.id}}</span>
+        <h2 class="text-md font-medium dark:text-light-10/80">{{pokemon.name}}</h2>
+        <span class="text-light-20 text-sm">#{{pokemon.id}}</span>
       </div>
       <div class="w-24">
         <img :src="pokemon.frontSprite" alt="Bulbasaur image">
@@ -58,8 +64,16 @@ const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
       <!-- <span class="bg-b/20 dark:bg-b/15 rounded-xl py-1 px-2.5 text-xs font-light dark:text-text leading-5">Poison</span> -->
     </section>
     <footer class="flex justify-between items-center dark:text-text">
-      <p class="text-sm">HP {{ pokemon.hp }}</p>
-      <button class="font-light px-4 py-1.5 cursor-pointer  from-light-linear-20 to-light-linear-10 rounded-tl-3xl rounded-br-3xl hover:bg-gradient-to-b transition-all duration-500 shadow-xss">
+      <p class="text-sm text-dark-10 dark:text-light-10/50">HP {{ pokemon.hp }}</p>
+      <button
+        @click="goToPokemonDetails(pokemon.name)"
+        class="font-light px-4 py-1.5 cursor-pointer
+        from-light-linear-20 to-light-linear-10
+        text-dark-10 dark:text-light-10
+        dark:from-dark-10 dark:to-dark-20/70
+        rounded-tl-3xl rounded-br-3xl
+        hover:bg-gradient-to-b transition-all duration-500 shadow-xss dark:shadow-xsd/15"
+      >
         See
       </button>
     </footer>

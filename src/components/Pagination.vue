@@ -1,7 +1,8 @@
 <script setup lang='ts'>
 import { usePokedex } from '@/composables/usePokedex'
-import { usePokedexStore } from '@/stores/pokedex';
 import { computed } from 'vue';
+import ArrawLeftIcon from '@/components/icons/IconArrawLeft.vue'
+import ArrawRightIcon from '@/components/icons/IconArrowRight.vue'
 
 // const store = usePokedexStore()
 const { totalPages, results, currentPage, pageSize, setPage, pokemons } = usePokedex()
@@ -39,8 +40,9 @@ const paginationRange = computed(() => {
   <!-- Botones de Paginación -->
   <div class="flex items-center flex-wrap gap-1 space-x-2">
     <button @click="setPage(currentPage - 1)" :disabled="currentPage === 1"
-      class=" bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd cursor-pointer dark:border-b/50 p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-light-30 hover:bg-light-40 dark:hover:bg-lgiht-30/10">
-      Previous
+      class=" bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd cursor-pointer dark:border-b/50 p-2 pr-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-light-30 hover:bg-light-40 dark:hover:bg-lgiht-30/10 flex justify-between items-center gap-2">
+      <ArrawLeftIcon />
+      <span>Previous</span>
     </button>
 
     <template v-for="page in paginationRange" :key="page">
@@ -56,8 +58,9 @@ const paginationRange = computed(() => {
     </template>
 
     <button @click="setPage(currentPage + 1)" :disabled="currentPage === totalPages || totalPages === 0"
-      class="bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd cursor-pointer p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-light-40 dark:hover:bg-light-30">
-      Next
+      class="bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd cursor-pointer p-2 pl-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-light-40 dark:hover:bg-light-30 flex justify-between items-center gap-2">
+      <span>Next</span>
+      <ArrawRightIcon />
     </button>
   </div>
 </template>
