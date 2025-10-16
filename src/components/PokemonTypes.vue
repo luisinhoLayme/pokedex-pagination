@@ -21,11 +21,9 @@ const handleSelectType = (e: Event) => {
 
 <template>
   <section>
-    <select id="countries"
-      :disabled="disabledArrt"
-      class="bg-white border border-b rounded-lg outline-none block w-full p-2.5 dark:bg-bg-2 dark:border-b/60 dark:placeholder-gray-400 dark:text-text cursor-pointer disabled:text-b disabled:cursor-default"
-      @change="handleSelectType"
-    >
+    <select id="countries" :disabled="disabledArrt"
+      class="bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd rounded-lg outline-none block w-full p-2.5 dark:placeholder-gray-400 cursor-pointer disabled:text-b disabled:cursor-default"
+      @change="handleSelectType">
       <option selected value="All">All types</option>
       <option value="normal">Normal</option>
       <option value="fighting">Fighting</option>
@@ -51,4 +49,12 @@ const handleSelectType = (e: Event) => {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+select::picker-icon {
+  color: #ffffff;
+  transition: 0.4s rotate;
+}
+select:open::picker-icon {
+  rotate: 180deg;
+}
+</style>

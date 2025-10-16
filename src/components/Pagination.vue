@@ -9,7 +9,7 @@ const { totalPages, results, theme, currentPage, pageSize, setPage, pokemons } =
 const paginationRange = computed(() => {
   const current = currentPage.value
   const last = totalPages.value
-  const delta = 2;
+  const delta = 1;
   const range: (number | '...')[] = [];
 
   for (let i = 1; i <= last; i++) {

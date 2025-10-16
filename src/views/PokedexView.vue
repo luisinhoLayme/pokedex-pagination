@@ -10,7 +10,6 @@ const { pokemons, isLoading, isFetching, results, pageSize, totalPages } = usePo
 
 <template>
   <main class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-    <!-- <div v-if="isLoading">Loading...</div> -->
     <div
       v-if="isLoading"
       v-for="ske of skeleton"

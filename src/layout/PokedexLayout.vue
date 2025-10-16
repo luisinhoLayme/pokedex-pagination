@@ -43,7 +43,7 @@ watch(route, changePage)
 </script>
 
 <template>
-  <header class="grid gap-3 xl:flex xl:gap-3 xl:items-center bg-white dark:bg-bg-2 dark:text-text">
+  <header class="grid gap-3 xl:flex xl:gap-3 xl:items-center bg-light-10 dark:bg-dark-10 dark:text-light-10">
     <section class="flex flex-col items-center justify-center xl:items-start">
       <div class="flex gap-4 items-center">
         <h1 class="text-4xl font-bold">Pokedex GO!</h1>
@@ -57,7 +57,7 @@ watch(route, changePage)
           <input
             :disabled="disableAttr"
             v-model="searchInput"
-            class="border border-b dark:border-b/60 outline-none w-full p-2.5 rounded-md"
+            class="shadow-xm dark:shadow-light-10/40 outline-none w-full p-2.5 rounded-md"
             type="text"
             placeholder="Search for name..."
           />
@@ -66,12 +66,12 @@ watch(route, changePage)
       <button
         @click="goToPage('pokedex')"
         :class="{'active': activeView === 'pokedex'}"
-        class="button-pokedex text-center h-max p-2.5 cursor-pointer border border-b rounded-md lg:col-start-4 xl:col-start-auto"
+        class="button-pokedex text-center h-max p-2.5 cursor-pointer shadow-xss dark:shadow-xsd bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 rounded-md lg:col-start-4 xl:col-start-auto"
       >Pokedex</button>
       <button
         @click="goToPage('favorites')"
         :class="{'active': activeView === 'favorites'}"
-        class="button-pokedex text-center h-max p-2.5 cursor-pointer border border-b dark:border-b/60 rounded-md"
+        class="button-pokedex text-center h-max p-2.5 cursor-pointer shadow-xss dark:shadow-xsd bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 rounded-md"
       >Favorites</button>
       <PokemonTypes :disabled-arrt="disableAttr" />
       <p
@@ -86,14 +86,14 @@ watch(route, changePage)
 <style scoped>
 html {
   .button-pokedex.active {
-    background-color: #303030;
-    color: #f5f5f5;
+    background-color: #A39ABD;
+    color: #343438;
   }
   &.dark {
 
     .button-pokedex.active {
-      background-color: #f5f5f5;
-      color: #282828;
+      background-color: #C3B8E2;
+      color: #495057;
     }
   }
 }

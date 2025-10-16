@@ -2,30 +2,201 @@
 
 @import "tailwindcss";
 
+@layer base {
+  :root {
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 45%;
+    /* Pokemon type colors - muted versions */
+    --type-fire: 14 80% 88%;
+    --type-water: 210 75% 88%;
+    --type-grass: 120 40% 88%;
+    --type-electric: 48 90% 88%;
+    --type-psychic: 300 50% 88%;
+    --type-ice: 190 60% 88%;
+    --type-dragon: 270 50% 88%;
+    --type-dark: 0 0% 75%;
+    --type-fairy: 320 60% 88%;
+    --type-normal: 30 10% 88%;
+    --type-fighting: 10 60% 88%;
+    --type-poison: 290 50% 88%;
+    --type-ground: 40 50% 88%;
+    --type-rock: 35 30% 88%;
+    --type-bug: 70 50% 88%;
+    --type-ghost: 270 35% 88%;
+    --type-steel: 220 10% 85%;
+    --type-flying: 210 50% 88%;
+
+    --type-fire-text: 14 80% 40%;
+    --type-water-text: 210 75% 40%;
+    --type-grass-text: 120 40% 35%;
+    --type-electric-text: 48 90% 40%;
+    --type-psychic-text: 300 50% 40%;
+    --type-ice-text: 190 60% 35%;
+    --type-dragon-text: 270 50% 40%;
+    --type-dark-text: 0 0% 30%;
+    --type-fairy-text: 320 60% 40%;
+    --type-normal-text: 30 10% 40%;
+    --type-fighting-text: 10 60% 35%;
+    --type-poison-text: 290 50% 40%;
+    --type-ground-text: 40 50% 35%;
+    --type-rock-text: 35 30% 35%;
+    --type-bug-text: 70 50% 35%;
+    --type-ghost-text: 270 35% 40%;
+    --type-steel-text: 220 10% 35%;
+    --type-flying-text: 210 50% 40%;
+
+    --type-normal-blur: 59 18% 56%;
+    --type-fire-blur: 24 85% 56%;
+    --type-water-blur: 218 77% 66%;
+    --type-electric-blur: 46 92% 57%;
+    --type-grass-blur: 97 47% 55%;
+    --type-ice-blur: 178 41% 72%;
+    --type-fighting-blur: 2 66% 46%;
+    --type-poison-blur: 301 46% 57%;
+    --type-ground-blur: 39 66% 64%;
+    --type-flying-blur: 253 76% 75%;
+    --type-psychic-blur: 339 91% 66%;
+    --type-bug-blur: 67 76% 38%;
+    --type-rock-blur: 49 54% 46%;
+    --type-ghost-blur: 265 27% 47%;
+    --type-dragon-blur: 258 97% 59%;
+    --type-dark-blur: 27 23% 36%;
+    --type-steel-blur: 240 19% 76%;
+    --type-fairy-blur: 330 44% 68%;
+  }
+  .dark {
+    --type-fire: 14 80% 88% / 70%;
+    --type-water: 210 75% 88% / 70%;
+    --type-grass: 120 40% 88% / 70%;
+    --type-electric: 48 90% 88% / 70%;
+    --type-psychic: 300 50% 88% / 70%;
+    --type-ice: 190 60% 88% / 70%;
+    --type-dragon: 270 50% 88% / 70%;
+    --type-dark: 0 0% 75% / 70%;
+    --type-fairy: 320 60% 88% / 70%;
+    --type-normal: 30 10% 88% / 70%;
+    --type-fighting: 10 60% 88% / 70%;
+    --type-poison: 290 50% 88% / 70%;
+    --type-ground: 40 50% 88% / 70%;
+    --type-rock: 35 30% 88% / 70%;
+    --type-bug: 70 50% 88% / 70%;
+    --type-ghost: 270 35% 88% / 70%;
+    --type-steel: 220 10% 85% / 70%;
+    --type-flying: 210 50% 88% / 70%;
+
+    --type-normal-blur: 59 18% 56% / 40%;
+    --type-fire-blur: 24 85% 56% / 40%;
+    --type-water-blur: 218 77% 66% / 40%;
+    --type-electric-blur: 46 92% 57% / 40%;
+    --type-grass-blur: 97 47% 55% / 40%;
+    --type-ice-blur: 178 41% 72% / 40%;
+    --type-fighting-blur: 2 66% 46% / 40%;
+    --type-poison-blur: 301 46% 57% / 40%;
+    --type-ground-blur: 39 66% 64% / 40%;
+    --type-flying-blur: 253 76% 75% / 40%;
+    --type-psychic-blur: 339 91% 66% / 40%;
+    --type-bug-blur: 67 76% 38% / 40%;
+    --type-rock-blur: 49 54% 46% / 40%;
+    --type-ghost-blur: 265 27% 47% / 40%;
+    --type-dragon-blur: 258 97% 59% / 40%;
+    --type-dark-blur: 27 23% 36% / 40%;
+    --type-steel-blur: 240 19% 76% / 40%;
+    --type-fairy-blur: 330 44% 68% / 40%;
+  }
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   /* light */
-  --color-b: #888D8A;
-  --color-bg: #282828;
+  --color-light-10: #DCD0FF;
+  --color-light-20: #AEAAAA;
+  --color-light-linear-10: #DCD0FF;
+  --color-light-linear-20: #AFAABE;
+  --color-light-30: #C3B8E2;
+  --color-light-40: #A39ABD;
+  --color-light-50: #495057;
   /* dark */
-  --color-bg-2: #2f2f2f;
+  --color-dark-10: #343438;
   --color-text: #f5f5f5;
 
   /* utils */
-  --shadow-poke: 0 1px 3px 1px rgba(0,0,0,0.25);
-  --shadow-poke-v2: 0 2px 3px rgba(222,222,222,0.10);
+  --shadow-xsd: 0px 2px 4px rgba(220, 208, 255, 0.25);
+  --shadow-xss: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-xm: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  --shadow-poke: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-poke-v2: 0 2px 3px rgba(222, 222, 222, 0.10);
+
+  --rounded-xs: 3px;
 
   --text-md: 20px;
+
+  --color-type-fire: hsl(var(--type-fire));
+  --color-type-water: hsl(var(--type-water));
+  --color-type-grass: hsl(var(--type-grass));
+  --color-type-electric: hsl(var(--type-electric));
+  --color-type-psychic: hsl(var(--type-psychic));
+  --color-type-ice: hsl(var(--type-ice));
+  --color-type-dragon: hsl(var(--type-dragon));
+  --color-type-dark: hsl(var(--type-dark));
+  --color-type-fairy: hsl(var(--type-fairy));
+  --color-type-normal: hsl(var(--type-normal));
+  --color-type-fighting: hsl(var(--type-fighting));
+  --color-type-poison: hsl(var(--type-poison));
+  --color-type-ground: hsl(var(--type-ground));
+  --color-type-rock: hsl(var(--type-rock));
+  --color-type-bug: hsl(var(--type-bug));
+  --color-type-ghost: hsl(var(--type-ghost));
+  --color-type-steel: hsl(var(--type-steel));
+  --color-type-flying: hsl(var(--type-flying));
+
+  --color-type-text-fire: hsl(var(--type-fire-text));
+  --color-type-text-water: hsl(var(--type-water-text));
+  --color-type-text-grass: hsl(var(--type-grass-text));
+  --color-type-text-electric: hsl(var(--type-electric-text));
+  --color-type-text-psychic: hsl(var(--type-psychic-text));
+  --color-type-text-ice: hsl(var(--type-ice-text));
+  --color-type-text-dragon: hsl(var(--type-dragon-text));
+  --color-type-text-dark: hsl(var(--type-dark-text));
+  --color-type-text-fairy: hsl(var(--type-fairy-text));
+  --color-type-text-normal: hsl(var(--type-normal-text));
+  --color-type-text-fighting: hsl(var(--type-fighting-text));
+  --color-type-text-poison: hsl(var(--type-poison-text));
+  --color-type-text-ground: hsl(var(--type-ground-text));
+  --color-type-text-rock: hsl(var(--type-rock-text));
+  --color-type-text-bug: hsl(var(--type-bug-text));
+  --color-type-text-ghost: hsl(var(--type-ghost-text));
+  --color-type-text-steel: hsl(var(--type-steel-text));
+  --color-type-text-flying: hsl(var(--type-flying-text));
+
+  --color-type-normal-blur: hsl(var(--type-normal-blur));
+  --color-type-fire-blur: hsl(var(--type-fire-blur));
+  --color-type-water-blur: hsl(var(--type-water-blur));
+  --color-type-electric-blur: hsl(var(--type-electric-blur));
+  --color-type-grass-blur: hsl(var(--type-grass-blur));
+  --color-type-ice-blur: hsl(var(--type-ice-blur));
+  --color-type-fighting-blur: hsl(var(--type-fighting-blur));
+  --color-type-poison-blur: hsl(var(--type-poison-blur));
+  --color-type-ground-blur: hsl(var(--type-ground-blur));
+  --color-type-flying-blur: hsl(var(--type-flying-blur));
+  --color-type-psychic-blur: hsl(var(--type-psychic-blur));
+  --color-type-bug-blur: hsl(var(--type-bug-blur));
+  --color-type-rock-blur: hsl(var(--type-rock-blur));
+  --color-type-ghost-blur: hsl(var(--type-ghost-blur));
+  --color-type-dragon-blur: hsl(var(--type-dragon-blur));
+  --color-type-dark-blur: hsl(var(--type-dark-blur));
+  --color-type-steel-blur: hsl(var(--type-steel-blur));
+  --color-type-fairy-blur: hsl(var(--type-fairy-blur));
 }
+
 
 /*#F7F5E6*/
 body {
-  @apply bg-[#f7f5e6] dark:bg-bg-2;
+  @apply bg-light-10 dark:bg-dark-10;
 }
 
 #app {
   @apply container m-auto font-poppins font-normal p-2 pt-5 xl:pt-10 xl:px-20;
 }
-

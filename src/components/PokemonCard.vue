@@ -1,10 +1,9 @@
 <script setup lang='ts'>
-import type { PokemonResponse } from '@/interfaces/pokeon.response';
-import img from './../assets/bulbbasaur.png'
 import { ref } from 'vue'
 import HeartIcon from './icons/IconHeart.vue'
 import type { Pokemon } from '@/interfaces/pokemon';
 import { typeColors } from '@/utils/typeColors'
+import { getTypeColorClasses } from '@/utils/getTypeColorClasses'
 import { useFavorites } from '../composables/useFavorites'
 
 type Props = {
@@ -13,31 +12,37 @@ type Props = {
 
 const { pokemon } = defineProps<Props>()
 const color = ref('#A8A77A')
+const bgTextOfType = ref<{bg:string, text:string}[]>([{bg: '', text: ''}])
 
 const type = pokemon.types[0]?.type.name as string
 color.value = typeColors[type] || '#A8A77A'
+// const colorType = getTypeColorClasses(type)
+// console.log(colorType)
+pokemon.types.map(type => {
+  const colorType = getTypeColorClasses(type.type.name)
+  bgTextOfType.value.push({bg: colorType.bg, text: colorType.text})
+})
 
 const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
 
 </script>
 
 <template>
-  <article class="shadow-poke dark:shadow-poke-v2 rounded-2xl grid gap-3 p-5 relative">
+  <article class="shadow-poke dark:shadow-poke-v2 rounded-xs grid gap-3 p-5 relative">
     <div
-      :class="`w-14 h-14 blur-2xl absolute right-15 top-15`"
-      :style="{backgroundColor: `${color}cc`}"
+      :class="`w-14 h-14 blur-2xl absolute right-15 top-15 ${color}`"
     ></div>
     <header class="flex justify-between items-center relative">
       <i
         @click="toggleFavoriteStatus(pokemon.id)"
         class="absolute -left-2 top-0 cursor-pointer"
-        :class="[isPokemonFavorite(pokemon.id) ? 'text-text' : 'text-b/50']"
+        :class="[isPokemonFavorite(pokemon.id) ? 'text-light-10' : 'text-light-10/30']"
       >
         <HeartIcon />
       </i>
       <div>
-        <h2 class="text-md font-medium dark:text-text">{{pokemon.name}}</h2>
-        <span class="text-b">#{{pokemon.id}}</span>
+        <h2 class="text-md font-medium dark:text-light-10">{{pokemon.name}}</h2>
+        <span class="text-light-20">#{{pokemon.id}}</span>
       </div>
       <div class="w-24">
         <img :src="pokemon.frontSprite" alt="Bulbasaur image">
@@ -46,8 +51,13 @@ const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
     <section class="flex gap-2">
 
       <span
-        class="bg-b/20 dark:bg-b/15 max-h-[29px] rounded-xl py-1 px-2.5 text-xs font-light dark:text-text leading-5"
+        class="max-h-[29px] rounded-xs py-1 px-2.5 text-xs font-light"
         v-for="type of pokemon.types"
+        :class="[
+          getTypeColorClasses(type.type.name).bg as string,
+          getTypeColorClasses(type.type.name).text as string,
+          'dark:bg-opacity-50'
+        ]"
         :key="type.type.name"
       >
         {{type.type.name}}
