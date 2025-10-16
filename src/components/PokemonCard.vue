@@ -12,16 +12,9 @@ type Props = {
 
 const { pokemon } = defineProps<Props>()
 const color = ref('#A8A77A')
-const bgTextOfType = ref<{bg:string, text:string}[]>([{bg: '', text: ''}])
 
 const type = pokemon.types[0]?.type.name as string
 color.value = typeColors[type] || '#A8A77A'
-// const colorType = getTypeColorClasses(type)
-// console.log(colorType)
-pokemon.types.map(type => {
-  const colorType = getTypeColorClasses(type.type.name)
-  bgTextOfType.value.push({bg: colorType.bg, text: colorType.text})
-})
 
 const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
 

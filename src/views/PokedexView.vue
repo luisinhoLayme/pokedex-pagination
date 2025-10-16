@@ -4,23 +4,23 @@ import Pagination from '@/components/Pagination.vue'
 import { usePokedex } from '@/composables/usePokedex';
 
 const skeleton = new Array(12).fill(null)
-const { pokemons, isLoading, isFetching, results, pageSize, totalPages } = usePokedex()
-// console.log(pokes)
+const { pokemons, isLoading, isPending, results } = usePokedex()
+
 </script>
 
 <template>
   <main class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
     <div
-      v-if="isLoading"
+      v-if="isPending"
       v-for="ske of skeleton"
-      class="min-h-56 bg-b/10 rounded-lg p-5 grid gap-5 animate-pulse"
+      class="min-h-56 bg-light-40/30 dark:bg-light-40/10 rounded-lg p-5 grid gap-5 animate-pulse"
     >
       <header class="grid gap-2 grid-cols-2">
-        <div class="min-h-9 bg-b/15"></div>
-        <div class="min-h-9 bg-b/15"></div>
+        <div class="min-h-9 bg-light-40/40 dark:bg-light-40/15"></div>
+        <div class="min-h-9 bg-light-40/40 dark:bg-light-40/15"></div>
       </header>
-      <div class="min-h-1 bg-b/15 w-50"></div>
-      <div class="min-h-2 bg-b/15"></div>
+      <div class="min-h-1 bg-light-40/40 dark:bg-light-40/15 w-50"></div>
+      <div class="min-h-2 bg-light-40/40 dark:bg-light-40/15"></div>
     </div>
 
     <div v-else-if="!pokemons || pokemons.length === 0" class="text-center p-8 col-span-full">

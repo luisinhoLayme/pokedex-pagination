@@ -4,6 +4,7 @@ import ButtonTheme from '@/components/ButtonTheme.vue'
 import { usePokedex } from '@/composables/usePokedex';
 import PokemonTypes from '@/components/PokemonTypes.vue'
 import { useRoute, useRouter, type RouteLocationNormalizedLoadedGeneric } from 'vue-router';
+import SearchIcon from '@/components/icons/IconSearch.vue'
 
 defineProps({})
 
@@ -54,13 +55,16 @@ watch(route, changePage)
     <section class="grid gap-2 md:grid-cols-4 lg:grid-cols-7 xl:items-center">
       <div class="md:col-span-full lg:col-start-1 lg:col-end-3 xl:col-start-2 xl:col-end-4">
         <form @submit.prevent="onSubmitSearch">
-          <input
-            :disabled="disableAttr"
-            v-model="searchInput"
-            class="shadow-xm dark:shadow-light-10/40 outline-none w-full p-2.5 rounded-md"
-            type="text"
-            placeholder="Search for name..."
-          />
+          <div class="flex items-center shadow-xm dark:shadow-light-10/40 rounded-md pl-3">
+            <SearchIcon class="w-5 text-light-50/60" />
+            <input
+              :disabled="disableAttr"
+              v-model="searchInput"
+              class=" outline-none w-full p-2.5 rounded-md"
+              type="text"
+              placeholder="Search for name..."
+            />
+          </div>
         </form>
       </div>
       <button

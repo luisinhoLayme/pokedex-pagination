@@ -13,7 +13,7 @@ const { toggleTheme } = useTheme()
 
 <template>
   <div @click="toggleOpen = !toggleOpen"
-    class="flex items-center justify-between gap-1 px-1.5 py-0.5 text-xs bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd h-max rounded-md relative cursor-pointer">
+    class="flex items-center justify-between gap-1 px-1.5 py-1 text-xs bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd h-max rounded-xs relative cursor-pointer">
     theme <i>
       <ThemeIcon />
     </i>

@@ -12,7 +12,7 @@ export const usePokedex = () => {
   } = storeToRefs(store)
 
 
-  const {data, isLoading, isFetching} = useQuery({
+  const {data, isLoading, isPending, isFetching} = useQuery({
     queryKey: ['pokemons', { currentPage, typeFilter, searchQuery}],
     queryFn: () => handleGetPokemons(
       currentPage.value,
@@ -34,13 +34,13 @@ export const usePokedex = () => {
 
 
   return {
-    theme,
     pokemons,
     currentPage,
     totalPages,
     pageSize,
     results,
     isLoading,
+    isPending,
     isFetching,
 
     setPage(page:number) {

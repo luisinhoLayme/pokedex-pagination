@@ -4,12 +4,12 @@ import { usePokedexStore } from '@/stores/pokedex';
 import { computed } from 'vue';
 
 // const store = usePokedexStore()
-const { totalPages, results, theme, currentPage, pageSize, setPage, pokemons } = usePokedex()
+const { totalPages, results, currentPage, pageSize, setPage, pokemons } = usePokedex()
 
 const paginationRange = computed(() => {
   const current = currentPage.value
   const last = totalPages.value
-  const delta = 1;
+  const delta = 2;
   const range: (number | '...')[] = [];
 
   for (let i = 1; i <= last; i++) {
@@ -39,24 +39,24 @@ const paginationRange = computed(() => {
   <!-- Botones de Paginación -->
   <div class="flex items-center flex-wrap gap-1 space-x-2">
     <button @click="setPage(currentPage - 1)" :disabled="currentPage === 1"
-      class="bg-white border border-b dark:bg-bg-2 cursor-pointer dark:border-b/50 dark:text-text p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-gray-200 dark:hover:bg-gray-50/10">
+      class=" bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd cursor-pointer dark:border-b/50 p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-light-30 hover:bg-light-40 dark:hover:bg-lgiht-30/10">
       Previous
     </button>
 
     <template v-for="page in paginationRange" :key="page">
       <span v-if="page === '...'" class="px-2 dark:text-text">...</span>
       <button v-else @click="setPage(page)"
-        class="border border-b dark:bg-bg-2 cursor-pointer dark:border-b/50 p-2 px-4 rounded-lg font-normal transition-colors" :class="[
+        class="cursor-pointer p-2 px-4 rounded-lg font-normal transition-colors" :class="[
           page === currentPage
-            ? 'bg-bg text-white shadow-md dark:bg-white dark:text-bg dark:hover:bg-white'
-            : theme === 'light' ? 'bg-white hover:bg-gray-200 dark:text-text dark:hover:bg-gray-50/10' : 'bg-gray-700 hover:bg-gray-600'
+            ? 'shadow-xss dark:shadow-xsd bg-light-40 text-dark-10 dark:bg-light-30 dark:text-light-50 dark:hover:bg-light-40'
+            : 'bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd hover:bg-light-40 dark:hover:bg-light-30'
         ]">
         {{ page }}
       </button>
     </template>
 
     <button @click="setPage(currentPage + 1)" :disabled="currentPage === totalPages || totalPages === 0"
-      class="bg-white border border-b dark:bg-bg-2 cursor-pointer dark:border-b/50 dark:text-text p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-gray-200 dark:hover:bg-gray-50/10">
+      class="bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd cursor-pointer p-2 px-4 rounded-lg font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-light-40 dark:hover:bg-light-30">
       Next
     </button>
   </div>
