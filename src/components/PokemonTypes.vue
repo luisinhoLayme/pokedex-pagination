@@ -23,13 +23,10 @@ const handleSelectType = (e: Event) => {
   <section>
     <form action="">
       <select id="countries" :disabled="disabledArrt"
-        class="bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd rounded-lg outline-none block w-full p-2.5 dark:placeholder-gray-400 cursor-pointer disabled:text-b disabled:cursor-default"
+        class="bg-light-30 text-light-50 dark:bg-light-40 dark:text-dark-10 shadow-xss dark:shadow-xsd rounded-lg outline-none block w-full p-2.5 dark:placeholder-gray-400 cursor-pointer disabled:text-b disabled:cursor-default "
         @change="handleSelectType">
         <option selected value="All">All types</option>
-        <option value="normal">
-         <span class="icon" aria-hidden="true">🐶</span
-          ><span class="option-label">Normal</span>
-        </option>
+        <option value="normal">Normal</option>
         <option value="fighting">Fighting</option>
         <option value="flying">Flying</option>
         <option value="poison">Poison</option>
@@ -59,7 +56,8 @@ select,
 ::picker(select) {
   appearance: base-select;
   background-color: #C3B8E2;
-  border: none;
+  scrollbar-width: thin;
+  scrollbar-color: #a39abd #c3b8e2; /* color del thumb y track */
 }
 
 html.dark {
@@ -71,25 +69,10 @@ html.dark {
   }
 }
 
-label {
-  width: fit-content;
-  align-self: center;
-}
-
-/* select { */
-/*   flex: 1; */
+/* select:hover, */
+/* select:focus { */
+/*   background-color: #C3B8E2; */
 /* } */
-/* select { */
-/*   border: 2px solid #dddddd; */
-/*   background: #eeeeee; */
-/*   padding: 10px; */
-/*   transition: 0.4s; */
-/* } */
-
-select:hover,
-select:focus {
-  background: #dddddd;
-}
 select::picker-icon {
   content: url('/arrow-down.svg');
   color: #495057;
@@ -101,16 +84,17 @@ select:open::picker-icon {
 }
 ::picker(select) {
   border: none;
+  margin-top: .3rem;
 }
 option {
-
-  /* border: 2px solid #dddddd; */
-  background: #eeeeee;
+  border: 1px solid #A39ABDaa;
+  background-color: #C3B8E2;
   padding: 10px;
   transition: 0.4s;
 }
 option:first-of-type {
   border-radius: 8px 8px 0 0;
+  /* margin-top: 1rem; */
 }
 
 option:last-of-type {
@@ -125,27 +109,34 @@ option:not(option:last-of-type) {
   border-bottom: none;
 }
 option:nth-of-type(odd) {
-  background: white;
+  /* background: white; */
+  /* background-color: #C3B8E2; */
 }
 
 option:hover,
 option:focus {
-  background: plum;
+  background-color: #A39ABD;
 }
-option .icon {
-  font-size: 1.6rem;
-  text-box: trim-both cap alphabetic;
+
+html.dark {
+  option {
+    border: 1px solid #AFAABE;
+    background-color: #A39ABD;
+  }
+
+  option:hover,
+  option:focus {
+    background-color: #C3B8E2;
+  }
 }
-selectedcontent .icon {
-  display: none;
-}
+
 option:checked {
   font-weight: bold;
 }
 option::checkmark {
   order: 1;
   margin-left: auto;
-  content: "☑️";
+  content: url('/check.svg');
 }
 ::picker(select) {
   opacity: 0;

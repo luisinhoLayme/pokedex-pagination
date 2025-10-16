@@ -29,7 +29,7 @@ const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
       <i
         @click="toggleFavoriteStatus(pokemon.id)"
         class="absolute -left-2 top-0 cursor-pointer"
-        :class="[isPokemonFavorite(pokemon.id) ? 'text-light-10' : 'text-light-10/30']"
+        :class="[isPokemonFavorite(pokemon.id) ? 'text-dark-10 dark:text-light-10' : 'text-light-40 dark:text-light-10/30']"
       >
         <HeartIcon />
       </i>
@@ -59,7 +59,7 @@ const { isPokemonFavorite, toggleFavoriteStatus } = useFavorites()
     </section>
     <footer class="flex justify-between items-center dark:text-text">
       <p class="text-sm">HP {{ pokemon.hp }}</p>
-      <button class="border border-bg hover:bg-b/20 dark:border-text/20 font-light px-4 py-1.5 rounded-2xl cursor-pointer">
+      <button class="font-light px-4 py-1.5 cursor-pointer  from-light-linear-20 to-light-linear-10 rounded-tl-3xl rounded-br-3xl hover:bg-gradient-to-b transition-all duration-500 shadow-xss">
         See
       </button>
     </footer>
