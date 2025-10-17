@@ -6,6 +6,8 @@ import { typeColors } from '@/utils/typeColors'
 import { getTypeColorClasses } from '@/utils/getTypeColorClasses'
 import { useFavorites } from '../composables/useFavorites'
 import { useRouter } from 'vue-router';
+import { useQueryClient } from '@tanstack/vue-query';
+import { handleGetPokemonByName } from '@/helpers/handleGetPokemonByName'
 
 type Props = {
   pokemon: Pokemon
@@ -14,6 +16,8 @@ type Props = {
 const { pokemon } = defineProps<Props>()
 const color = ref('#A8A77A')
 const roter = useRouter()
+
+const queryClient = useQueryClient()
 
 const type = pokemon.types[0]?.type.name as string
 color.value = typeColors[type] || '#A8A77A'
@@ -24,10 +28,19 @@ const goToPokemonDetails = (name: string) => {
   roter.push({name: 'pokemon', params: { name }})
 }
 
+const prefetchPokemonDetails = () => {
+  queryClient.prefetchQuery({
+    queryKey: ['pokemon-details', pokemon.name],
+    queryFn: () => handleGetPokemonByName(pokemon.name),
+    staleTime: 1000 * 60 * 60, // 1 horas: Los datos de un Pokémon son estáticos.
+  })
+}
 </script>
 
 <template>
-  <article class="shadow-xss dark:shadow-xsd/15 rounded-xs grid gap-3 p-5 relative dark:bg-dark-40">
+  <article
+    @mouseenter="prefetchPokemonDetails"
+    class="shadow-xss dark:shadow-xsd/15 rounded-xs grid gap-3 p-5 relative dark:bg-dark-40">
     <div
       :class="`w-14 h-14 dark:w-12 dark:h-12 blur-2xl dark:blur-xl absolute right-15 top-15 ${color}`"
     ></div>

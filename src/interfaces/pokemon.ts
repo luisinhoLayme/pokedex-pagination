@@ -1,4 +1,4 @@
-import type { Type } from "./pokeon.response"
+import type { Ability, Move, Stat, Type } from "./pokeon.response"
 
 export interface Pokemon {
   id: number
@@ -6,4 +6,16 @@ export interface Pokemon {
   hp: number
   types: Type[]
   frontSprite: string
+}
+
+export interface PokemonDetails {
+  abilities: Ability[];
+  height: number;
+  id: number;
+  moves: string[];
+  name: string;
+  frontSprite: string;
+  stats: Stat[];
+  types: Type[];
+  weight: number;
 }
