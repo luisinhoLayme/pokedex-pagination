@@ -14,9 +14,9 @@ app.use(router)
 VueQueryPlugin.install(app, {
   queryClientConfig: {
     defaultOptions: {
-      queries: {
-        gcTime: 1000 * 60, // 1min
-      }
+      // queries: {
+      //   gcTime: 1000 * 60, // 1min
+      // }
     }
   },
   enableDevtoolsV6Plugin: true
