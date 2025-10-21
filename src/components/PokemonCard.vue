@@ -28,6 +28,7 @@ const goToPokemonDetails = (name: string) => {
   roter.push({name: 'pokemon', params: { name }})
 }
 
+
 const prefetchPokemonDetails = () => {
   queryClient.prefetchQuery({
     queryKey: ['pokemon-details', pokemon.name],

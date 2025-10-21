@@ -10,6 +10,7 @@ import { useTheme } from '@/composables/useTheme';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter'
 import { getTypeColorClasses } from '@/utils/getTypeColorClasses';
 import { typeColors } from '@/utils/typeColors';
+import StatPokemon from '@/components/StatPokemon.vue';
 
 defineProps({})
 const route = useRoute()
@@ -62,23 +63,32 @@ const toggleFavorites = () => {
   <div v-else-if="isError">Pokemon not loaded</div>
   <main
     v-else-if="pokemon"
-    class="mt-10 grid gap-4"
+    class="mt-10 grid gap-4 lg:gap-6
+    lg:grid-cols-3 lg:grid-rows-20
+    lg:max-h-[89vh]
+    text-dark-10 dark:text-light-10"
   >
-    <section class="shadow-xss rounded-2xl">
-      <img :src="pokemon.frontSprite" :alt="pokemon.name">
+    <section class="shadow-xss rounded-2xl dark:shadow-xsd  lg:row-[1/12]">
+      <img :src="pokemon.frontSprite" :alt="pokemon.name" class="w-full h-full">
     </section>
 
-    <section class="shadow-xss rounded-2xl p-4 grid gap-3">
+    <section class="
+      shadow-xss rounded-2xl p-4 flex gap-20
+      lg:p-8
+      lg:grid-cols-2 dark:shadow-xsd
+      lg:col-[2/4]
+      lg:row-[1/5]
+      ">
       <div>
-        <h1 class="font-bold text-3xl">{{capitalizeFirstLetter(pokemon.name)}}</h1>
-        <span class="text-light-50">#{{pokemon.id}}</span>
+        <h1 class="font-bold text-3xl lg:text-4xl">{{capitalizeFirstLetter(pokemon.name)}}</h1>
+        <span class="text-light-50 lg:text-xl">#{{pokemon.id}}</span>
       </div>
-      <div>
+      <div class="">
         <div class="flex gap-5">
-          <strong>Height: <span class="font-normal">{{pokemon.height}} m</span></strong>
-          <strong>Weight: <span class="font-normal">{{pokemon.weight}} kg</span></strong>
+          <strong class="text-xl">Height: <span class="font-normal lg:text-xl">{{pokemon.height}} m</span></strong>
+          <strong class="text-xl">Weight: <span class="font-normal lg:text-xl">{{pokemon.weight}} kg</span></strong>
         </div>
-        <div class="mt-3">
+        <div class="mt-3 flex gap-3">
           <p
             v-for="type of pokemon.types"
             class="w-max py-1 px-4 rounded-3xl border "
@@ -93,7 +103,11 @@ const toggleFavorites = () => {
       </div>
     </section>
 
-    <section class="shadow-xss rounded-2xl p-4 grid gap-3">
+    <section class="
+      shadow-xss rounded-2xl p-4 grid gap-3 dark:shadow-xsd
+      lg:grid-cols-2 lg:p-8
+      lg:col-[2/4] lg:row-[5/12]
+      ">
       <div>
         <h2 class="font-semibold text-2xl">Abilites</h2>
         <ul class="square-list pl-1">
@@ -105,14 +119,60 @@ const toggleFavorites = () => {
         </ul>
       </div>
       <div>
-        <h2 class="font-semibold text-2xl">Movements (Top 6)</h2>
-        <ul class="square-list pl-1">
+        <h2 class="font-semibold text-2xl">Movements (Top {{pokemon.moves.length}})</h2>
+        <ul class="square-list pl-1 flex flex-wrap">
           <li
             class="before:text-dark-20"
             v-for="move in pokemon.moves"
             :key="move"
           >{{move}}</li>
         </ul>
+      </div>
+    </section>
+    <section class="
+      shadow-xss dark:shadow-xsd rounded-2xl p-4 grid lg:grid-cols-2 gap-3
+      lg:col-span-full lg:row-[12/20]
+      ">
+      <h2 class="font-semibold text-2xl col-span-full">Stats</h2>
+      <div class="grid gap-3">
+        <StatPokemon
+          :stat="pokemon.stats[0]!"
+          icon="❤️"
+          color="#EF4444"
+          description="Health points how much damage can resist."
+        />
+        <StatPokemon
+          :stat="pokemon.stats[1]!"
+          icon="⚔️"
+          color="#F97316"
+          description="Physical damage it can cause"
+        />
+        <StatPokemon
+          :stat="pokemon.stats[2]!"
+          icon="🛡️"
+          color="#22C55E"
+          description="Resistance to physical damage"
+        />
+      </div>
+      <div class="grid gap-3">
+        <StatPokemon
+          :stat="pokemon.stats[3]!"
+          icon="✨"
+          color="#A855F7"
+          description="Potencia of attack specials."
+        />
+        <StatPokemon
+          :stat="pokemon.stats[4]!"
+          icon="🔮"
+          color="#6366F1"
+          description="Resistance to special attacks."
+        />
+        <StatPokemon
+          :stat="pokemon.stats[5]!"
+          icon="⚡"
+          color="#FACC15"
+          description="How fast it attacks or moves."
+        />
       </div>
     </section>
   </main>
