@@ -19,10 +19,12 @@ const {stat} = defineProps<Props>()
   <div>
     <div class="flex justify-between font-medium">
       <span>{{icon}} {{capitalizeFirstLetter(stat.stat.name)}}</span>
-      <span>{{stat.base_stat}}</span>
+      <span>{{stat.base_stat > 100 ? 100 : stat.base_stat}}</span>
     </div>
     <div class="h-4 bg-dark-20/30 rounded-2xl">
-      <div :style="{width: `${stat.base_stat}%`, backgroundColor: color}" class="rounded-2xl h-full"></div>
+      <div :style="{
+        width: `${stat.base_stat > 100 ? '100' : stat.base_stat}%`,
+        backgroundColor: color}" class="rounded-2xl h-full"></div>
     </div>
     <p class="text-xs text-dark-30 dark:text-light-40">{{ description }}</p>
   </div>
