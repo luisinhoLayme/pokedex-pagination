@@ -111,6 +111,7 @@
   --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   /* light */
+  --color-light-5: #EBEBEB;
   --color-light-10: #DCD0FF;
   --color-light-20: #AEAAAA;
   --color-light-linear-10: #DCD0FF;

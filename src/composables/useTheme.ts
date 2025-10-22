@@ -52,6 +52,6 @@ export function useTheme() {
   return {
     isDark,
     currentTheme,
-    toggleTheme: setOrToggleTheme // Renombramos para mantener la interfaz del componente
+    toggleTheme: setOrToggleTheme
   };
 }

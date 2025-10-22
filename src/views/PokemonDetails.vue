@@ -72,7 +72,7 @@ const toggleFavorites = () => {
     lg:max-h-[89vh]
     text-dark-10 dark:text-light-30"
   >
-    <section class="shadow-xss rounded-2xl dark:shadow-xsd  lg:row-[1/12]">
+    <section class="shadow-xss rounded-2xl dark:shadow-xsd  lg:row-[1/12] relative">
       <img :src="pokemon.frontSprite" :alt="pokemon.name" class="w-full h-full">
     </section>
 
@@ -87,7 +87,7 @@ const toggleFavorites = () => {
         <h1 class="font-bold text-3xl lg:text-4xl">{{capitalizeFirstLetter(pokemon.name)}}</h1>
         <span class="text-light-50 lg:text-xl">#{{pokemon.id}}</span>
       </div>
-      <div class="">
+      <div class="dark:text-light-5/70">
         <div class="grid gap-1 min-[350px]:gap-5 min-[350px]:flex whitespace-nowrap">
           <strong class="text-xl">Height: <span class="font-normal lg:text-xl">{{pokemon.height}} m</span></strong>
           <strong class="text-xl">Weight: <span class="font-normal lg:text-xl">{{pokemon.weight}} kg</span></strong>
@@ -116,7 +116,7 @@ const toggleFavorites = () => {
         <h2 class="font-semibold text-2xl">Abilites</h2>
         <ul class="square-list pl-1 flex gap-4 flex-wrap sm:grid sm:gap-2 mt-2">
           <li
-            class="before:text-dark-20"
+            class="before:text-dark-20 dark:text-light-5/70"
             v-for="abilite in pokemon.abilities"
             :key="abilite.ability?.name"
           >{{abilite.ability?.name}}</li>
@@ -127,14 +127,14 @@ const toggleFavorites = () => {
         <ul class="square-list pl-1 grid gap-2 min-[350px]:flex min-[350px]:gap-10 mt-2">
           <div class="grid gap-2">
             <li
-              class="before:text-dark-20"
+              class="before:text-dark-20 dark:text-light-5/70"
               v-for="move in pokemon.moves.slice(0, 3)"
               :key="move"
             >{{move}}</li>
           </div>
           <div class="grid gap-2">
             <li
-              class="before:text-dark-20"
+              class="before:text-dark-20 dark:text-light-5/70"
               v-for="move in pokemon.moves.slice(3, 6)"
               :key="move"
             >{{move}}</li>
@@ -194,21 +194,18 @@ const toggleFavorites = () => {
 </template>
 
 <style scoped>
-/* Aplica la propiedad directamente a la clase personalizada */
 /* .square-list { */
 /*   list-style-type: square; */
 /* } */
 
-/* O, si prefieres usar pseudo-elementos para un mayor control */
 .square-list li {
   position: relative;
-  padding-left: 1rem; /* Espacio para el marcador */
+  padding-left: 1rem;
 }
 
 .square-list li::before {
-  content: '■'; /* Carácter Unicode de un cuadrado */
+  content: '■';
   position: absolute;
   left: 0;
-  /*color: #333;  Color del cuadrado */
 }
 </style>

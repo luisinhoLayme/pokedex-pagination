@@ -41,7 +41,8 @@ const prefetchPokemonDetails = () => {
 <template>
   <article
     @mouseenter="prefetchPokemonDetails"
-    class="shadow-xss dark:shadow-xsd/15 rounded-xs grid gap-3 p-5 relative dark:bg-dark-40">
+    class="shadow-xss dark:shadow-xsd/15 rounded-xs grid gap-3 p-5 relative dark:bg-dark-40 transition-transform duration-300 ease-in-out
+              hover:skew-x-3 hover:scale-105 hover:rotate-2">
     <div
       :class="`w-14 h-14 dark:w-12 dark:h-12 blur-2xl dark:blur-xl absolute right-15 top-15 ${color}`"
     ></div>

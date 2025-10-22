@@ -2,13 +2,13 @@ import { handleGetPokemons } from "@/helpers/handleGetPokemons";
 import { usePokedexStore } from "@/stores/pokedex";
 import { useQuery } from "@tanstack/vue-query";
 import { storeToRefs } from "pinia";
-import { computed, watch } from "vue";
+import {  watch } from "vue";
 
 export const usePokedex = () => {
   const store = usePokedexStore()
   const {
     currentPage, pageSize, pokemons,
-    totalPages, theme, results, typeFilter, searchQuery
+    totalPages, results, typeFilter, searchQuery
   } = storeToRefs(store)
 
 
